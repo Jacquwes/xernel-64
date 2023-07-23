@@ -3,6 +3,15 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+limine
+iso_root
+
+# Build files
+*.o
+*.d
+*.elf
+*.iso
+
 # User-specific files
 *.rsuser
 *.suo
