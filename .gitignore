@@ -3,8 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
-limine
-iso_root
+limine/
+iso_root/
+
+.vscode/
 
 # Build files
 *.o
