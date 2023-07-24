@@ -16,6 +16,8 @@ cpp_flags		= \
 	-fPIE \
 	-g \
 	-Iinclude \
+	-Iinclude/stl \
+	-Iinclude/stl/c \
 	-m64 \
 	-march=x86-64 \
 	-mabi=sysv \
@@ -40,8 +42,8 @@ ld_flags		= \
 	-z max-page-size=0x1000 \
 	-T src/linker.ld \
 
-cpp_files		:= $(shell find -L . -type f -name '*.cpp' | grep -v 'build/')
-asm_files		:= $(shell find -L . -type f -name '*.asm' | grep -v 'build/')
+cpp_files		:= $(shell find -L . -type f -name '*.cpp')
+asm_files		:= $(shell find -L . -type f -name '*.asm')
 objects			:= $(cpp_files:.cpp=.cpp.o) $(asm_files:.asm=.asm.o)
 headers			:= $(cpp_files:.cpp=.cpp.d) $(asm_files:.asm=.asm.d)
 
