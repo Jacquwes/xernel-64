@@ -18,12 +18,15 @@
 
 #include <limine.h>
 
-#include <stl/int.hpp>
+#define GLOBAL_NUMERICS
+
+#include <numerics.hpp>
 
 static volatile struct limine_framebuffer_request framebuffer_request =
 {
-	.id = LIMINE_FRAMEBUFFER_REQUEST,
-	.revision = 0,
+	LIMINE_FRAMEBUFFER_REQUEST,
+	0,
+	0,
 };
 
 void halt()
@@ -41,10 +44,10 @@ extern "C" void _start()
 
 	limine_framebuffer *framebuffer = framebuffer_request.response->framebuffers[0];
 
-	for (size_t i = 0; i < 100; i++)
+	for (u32 i = 0; i < 100; i++)
 	{
 		uint32_t* fb = reinterpret_cast<uint32_t*>(framebuffer->address);
-		fb[i * (framebuffer->pitch / 4) + i] = 0x0000ff;
+		fb[i * (framebuffer->pitch / 4) + i] = i * 0xffffff / 100;
 	}
 
 	halt();

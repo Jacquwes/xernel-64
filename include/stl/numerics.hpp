@@ -18,7 +18,33 @@
 
 #pragma once
 
-typedef unsigned int uint32_t;
-typedef long unsigned int uint64_t;
+namespace std
+{
+    using i8    = signed char;
+    using u8    = unsigned char;
+    using i16   = signed short;
+    using u16   = unsigned short;
+    using i32   = signed long;
+    using u32   = unsigned long;
+    using i64   = signed long long;
+    using u64   = unsigned long long;
 
-typedef uint64_t size_t;
+    using f32   = float;
+    using f64   = double;
+    using f128  = long double;
+}
+
+#ifdef GLOBAL_NUMERICS
+using std::i8;
+using std::u8;
+using std::i16;
+using std::u16;
+using std::i32;
+using std::u32;
+using std::i64;
+using std::u64;
+
+using std::f32;
+using std::f64;
+using std::f128;
+#endif
