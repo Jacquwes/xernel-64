@@ -2438,7 +2438,7 @@ namespace kernel
 		}
 	};
 
-	void terminal::draw_char(u8 character, u32 color)
+	void terminal::put_char(u8 character, u32 color)
 	{
 		if (character == '\n')
 		{

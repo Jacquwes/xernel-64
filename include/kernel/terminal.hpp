@@ -35,7 +35,7 @@ namespace kernel
 
 		terminal();
 
-		void draw_char(u8 c, u32 color = 0x777777);
+		void put_char(u8 c, u32 color = 0x777777);
 
 		u64 rows;
 		u64 columns;
