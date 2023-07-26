@@ -16,39 +16,21 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <limine.h>
-
 #define GLOBAL_NUMERICS
 
 #include <numerics.hpp>
 
-static volatile struct limine_framebuffer_request framebuffer_request =
-{
-	LIMINE_FRAMEBUFFER_REQUEST,
-	0,
-	0,
-};
-
-void halt()
-{
-	asm("cli");
-	for (;;)
-		asm("hlt");
-}
+#include <halt.hpp>
+#include <screen.hpp>
+#include <terminal.hpp>
 
 extern "C" void _start()
 {
-	if (framebuffer_request.response == 0
-		|| framebuffer_request.response->framebuffer_count < 1)
-		halt();
+	auto screen = kernel::screen_manager();
 
-	limine_framebuffer *framebuffer = framebuffer_request.response->framebuffers[0];
+	auto terminal = kernel::terminal();
 
-	for (u32 i = 0; i < 100; i++)
-	{
-		uint32_t* fb = reinterpret_cast<uint32_t*>(framebuffer->address);
-		fb[i * (framebuffer->pitch / 4) + i] = i * 0xffffff / 100;
-	}
+	terminal.put_string("Hello, world!\nf", 0xff7777);
 
-	halt();
+	kernel::halt();
 }

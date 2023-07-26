@@ -16,17 +16,24 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#pragma once
+#include <screen.hpp>
+#include <terminal.hpp>
 
-using i8    = signed char;
-using u8    = unsigned char;
-using i16   = signed short;
-using u16   = unsigned short;
-using i32   = signed long;
-using u32   = unsigned long;
-using i64   = signed long long;
-using u64   = unsigned long long;
+namespace kernel
+{
+    terminal* terminal::instance = nullptr;
 
-using f32   = float;
-using f64   = double;
-using f128  = long double;
+	terminal::terminal()
+	{
+		instance = this;
+
+		rows = screen_manager::instance->height / 16;
+		columns = screen_manager::instance->width / 9;
+	}
+
+	void terminal::put_string(const char* str, u32 color)
+	{
+		for (const char* c = str; *c; c++)
+			put_char(*c, color);
+	}
+}

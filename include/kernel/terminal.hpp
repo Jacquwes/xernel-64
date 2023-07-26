@@ -18,15 +18,29 @@
 
 #pragma once
 
-using i8    = signed char;
-using u8    = unsigned char;
-using i16   = signed short;
-using u16   = unsigned short;
-using i32   = signed long;
-using u32   = unsigned long;
-using i64   = signed long long;
-using u64   = unsigned long long;
+#include <numerics.hpp>
 
-using f32   = float;
-using f64   = double;
-using f128  = long double;
+namespace kernel
+{
+	class terminal
+	{
+	public:
+		struct cursor
+		{
+			u64 row;
+			u64 column;
+		};
+
+		static terminal* instance;
+
+		terminal();
+
+		void put_char(u8 c, u32 color = 0x777777);
+		void put_string(const char* str, u32 color = 0x777777);
+
+		u64 rows;
+		u64 columns;
+
+		cursor cursor;
+	};
+}

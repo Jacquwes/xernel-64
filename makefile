@@ -17,6 +17,7 @@ cpp_flags		= \
 	-g \
 	-Iinclude \
 	-Iinclude/stl \
+	-Iinclude/kernel \
 	-m64 \
 	-march=x86-64 \
 	-mabi=sysv \
