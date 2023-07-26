@@ -16,35 +16,14 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include <limine.h>
+#pragma once
 
-#define GLOBAL_NUMERICS
-
-#include <numerics.hpp>
-
-static volatile struct limine_framebuffer_request framebuffer_request =
+namespace kernel
 {
-	LIMINE_FRAMEBUFFER_REQUEST,
-	0,
-	0,
-};
-
-void halt()
-{
-	asm("cli");
-	for (;;)
-		asm("hlt");
-}
-
-extern "C" void _start()
-{
-
-
-	for (u32 i = 0; i < 100; i++)
+	void halt()
 	{
-		uint32_t* fb = reinterpret_cast<uint32_t*>(framebuffer->address);
-		fb[i * (framebuffer->pitch / 4) + i] = i * 0xffffff / 100;
+		asm("cli");
+		for (;;)
+			asm("hlt");
 	}
-
-	kernel::halt();
 }
