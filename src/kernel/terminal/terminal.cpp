@@ -30,4 +30,10 @@ namespace kernel
 		rows = screen_manager::instance->height / 16;
 		columns = screen_manager::instance->width / 9;
 	}
+
+	void terminal::put_string(const char* str, u32 color)
+	{
+		for (const char* c = str; *c; c++)
+			put_char(*c, color);
+	}
 }

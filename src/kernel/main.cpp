@@ -30,11 +30,7 @@ extern "C" void _start()
 
 	auto terminal = kernel::terminal();
 
-
-	for (u8 i = 0; i < 0xff; i++)
-	{
-		terminal.draw_char(i, 0x777777);
-	}
+	terminal.put_string("Hello, world!\nf", 0xff7777);
 
 	kernel::halt();
 }
