@@ -20,7 +20,10 @@
 
 namespace kernel
 {
-	void halt()
+	/// <summary>
+	/// Disables interrupts and halts the CPU forever.
+	/// </summary>
+	[[noreturn]] inline void halt()
 	{
 		asm("cli");
 		for (;;)
