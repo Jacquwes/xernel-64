@@ -24,16 +24,39 @@
 
 namespace kernel
 {
+	/// <summary>
+	/// Manages the screen.
+	/// It is a singleton.
+	/// </summary>
 	class screen_manager
 	{
 	public:
+		/// <summary>
+		/// Singleton instance of the screen manager.
+		/// </summary>
 		static screen_manager* instance;
 
+		/// <summary>
+		/// Initializes the screen manager.
+		/// </summary>
 		screen_manager();
 
+		/// <summary>
+		/// Width of the screen in pixels.
+		/// </summary>
 		u64 width;
+
+		/// <summary>
+		/// Height of the screen in pixels.
+		/// </summary>
 		u64 height;
 
+		/// <summary>
+		/// Draws a pixel on the screen.
+		/// </summary>
+		/// <param name="x">X position of the pixel.</param>
+		/// <param name="y">Y position of the pixel.</param>
+		/// <param name="color">RGB color of the pixel.</param>
 		void draw_pixel(u64 x, u64 y, u32 color);
 
 	private:

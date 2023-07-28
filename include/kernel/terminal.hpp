@@ -52,16 +52,16 @@ namespace kernel
 		/// Puts a character on the terminal.
 		/// </summary>
 		/// <param name="c">Character to put.</param>
-		/// <param name="foreground_color">Color of the character.</param>
-		/// <param name="background_color">Color of the background.</param>
+		/// <param name="foreground_color">RGB color of the character.</param>
+		/// <param name="background_color">RGB color of the background.</param>
 		void put_char(u8 c, u32 foreground_color = 0x777777, u32 background_color = 0x000000);
 		
 		/// <summary>
 		/// Puts a string on the terminal.
 		/// </summary>
 		/// <param name="str">String to put.
-		/// <param name="foreground_color">Color of the string.</param>
-		/// <param name="background_color">Color of the background.</param>
+		/// <param name="foreground_color">RGB color of the string.</param>
+		/// <param name="background_color">RGB color of the background.</param>
 		void put_string(const char* str, u32 foreground_color = 0x777777, u32 background_color = 0x000000);
 
 		/// <summary>
