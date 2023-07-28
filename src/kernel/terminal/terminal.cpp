@@ -31,9 +31,9 @@ namespace kernel
 		columns = screen_manager::instance->width / 9;
 	}
 
-	void terminal::put_string(const char* str, u32 color)
+	void terminal::put_string(const char* str, u32 foreground_color, u32 background_color)
 	{
 		for (const char* c = str; *c; c++)
-			put_char(*c, color);
+			put_char(*c, foreground_color, background_color);
 	}
 }

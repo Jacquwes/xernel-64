@@ -20,6 +20,7 @@
 
 #include <limine.h>
 #include <numerics.hpp>
+#include <terminal.hpp>
 
 namespace kernel
 {

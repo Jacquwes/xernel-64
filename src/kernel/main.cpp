@@ -30,7 +30,7 @@ extern "C" void _start()
 
 	auto terminal = kernel::terminal();
 
-	terminal.put_string("Hello, world!\nf", 0xff7777);
+	terminal.put_string("Hello, world!\nf", 0xff7777, 0x007777);
 
 	kernel::halt();
 }

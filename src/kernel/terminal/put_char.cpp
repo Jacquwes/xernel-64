@@ -2438,7 +2438,7 @@ namespace kernel
 		}
 	};
 
-	void terminal::put_char(u8 character, u32 color)
+	void terminal::put_char(u8 character, u32 foreground_color, u32 background_color)
 	{
 		if (character == '\n')
 		{
@@ -2452,15 +2452,11 @@ namespace kernel
 		auto glyph = font[character];
 
 		for (u8 y = 0; y < 15; y++)
-		{
 			for (u8 x = 0; x < 9; x++)
-			{
 				if (glyph[y] & (1 << x))
-				{
-					screen->draw_pixel(cursor.column * 9 + (9 - x - 1), cursor.row * 16 + y, color);
-				}
-			}
-		}
+					screen->draw_pixel(cursor.column * 9 + (9 - x - 1), cursor.row * 16 + y, foreground_color);
+				else
+					screen->draw_pixel(cursor.column * 9 + (9 - x - 1), cursor.row * 16 + y, background_color);
 
 		cursor.column++;
 		if (cursor.column >= columns)
