@@ -346,16 +346,19 @@ namespace kernel
 			/// <param name="limit/>New value for the limit.</param>
 			void set_limit(u32 limit);
 
+			// todo: implement base high
 			/// <returns>
 			/// The base of the segment.
 			/// </returns>
-			u64 get_base() const;
+			u64 get_base_low() const;
+			u64 get_base_high() const;
 
 			/// <summary>
 			/// Set the base of the segment.
 			/// </summary>
 			/// <param name="base">New value for the base.</param>
-			void set_base(u64 base);
+			void set_base_low(u64 base);
+			void set_base_high(u64 base);
 
 			/// <returns>
 			/// The access byte of the segment.
