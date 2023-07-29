@@ -121,5 +121,56 @@ namespace kernel
 			value &= (0b0111'1111 | ((present & 0b0000'0001) << 7));
 		}
 
+		segment_descriptor_t::system_access_byte_t::system_access_byte_t(u8 value_)
+		{
+			value = value_;
+		}
+
+		segment_descriptor_t::system_access_byte_t::segment_type_t segment_descriptor_t::system_access_byte_t::get_segment_type() const
+		{
+			return (segment_type_t)
+				(value & 0b0000'1111);
+		}
+
+		void segment_descriptor_t::system_access_byte_t::set_segment_type(segment_type_t type)
+		{
+			value &= (0b1111'0000 | (type & 0b0000'1111));
+		}
+
+		segment_descriptor_t::flags_t::flags_t(u8 value_)
+		{
+			value = value_;
+		}
+
+		u8 segment_descriptor_t::flags_t::get_long_mode() const
+		{
+			return (value & 0b0010) >> 1;
+		}
+
+		void segment_descriptor_t::flags_t::set_long_mode(u8 long_mode)
+		{
+			value &= (0b1101 | ((long_mode & 0b0001) << 1));
+		}
+
+		u8 segment_descriptor_t::flags_t::get_size() const
+		{
+			return (value & ob0100) >> 2;
+		}
+
+		void segment_descriptor_t::flags_t::set_size(u8 size)
+		{
+			value &= (0b1011 | ((size & 0b0001) << 2));
+		}
+
+		u8 segment_descriptor_t::flags_t::get_granularity() const
+		{
+			return (value & 0b1000) >> 3;
+		}
+
+		void segment_descriptor_t::flags_t::set_granularity(u8 granularity)
+		{
+			value &= (0b0111 | ((granularity & 0b0001) << 3));
+		}
+
 	}
 }
