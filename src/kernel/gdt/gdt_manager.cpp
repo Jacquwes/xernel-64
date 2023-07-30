@@ -48,8 +48,8 @@ namespace kernel
 			// 0x9A (0b1001'1010)
 			access_byte.set_accessed(false);
 			access_byte.set_readable(true);
-			access_byte.set_conforming(false);
-			access_byte.set_executable(true);
+			access_byte.set_conforming(segment_descriptor_t::access_byte_t::conforming_t::SAME_RING);
+			access_byte.set_executable(segment_descriptor_t::access_byte_t::executable_t::CODE);
 			access_byte.set_descriptor_type(segment_descriptor_t::access_byte_t::descriptor_type_t::CODE_OR_DATA);
 			access_byte.set_privilege_level(0);
 			access_byte.set_present(true);
@@ -68,7 +68,7 @@ namespace kernel
 			access_byte.set_accessed(false);
 			access_byte.set_writable(true);
 			access_byte.set_direction(segment_descriptor_t::access_byte_t::direction_t::GROW_UP);
-			access_byte.set_executable(false);
+			access_byte.set_executable(segment_descriptor_t::access_byte_t::executable_t::DATA);
 			access_byte.set_descriptor_type(segment_descriptor_t::access_byte_t::descriptor_type_t::CODE_OR_DATA);
 			access_byte.set_privilege_level(0);
 			access_byte.set_present(true);
