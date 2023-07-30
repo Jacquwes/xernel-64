@@ -154,7 +154,7 @@ namespace kernel
 
 		u8 segment_descriptor_t::flags_t::get_size() const
 		{
-			return (value & ob0100) >> 2;
+			return (value & 0b0100) >> 2;
 		}
 
 		void segment_descriptor_t::flags_t::set_size(u8 size)
@@ -172,5 +172,60 @@ namespace kernel
 			value &= (0b0111 | ((granularity & 0b0001) << 3));
 		}
 
+		u32 segment_descriptor_t::get_limit() const
+		{
+			u32 limit_low = data_low & 0x0000'0000'0000'ffff;
+			u32 limit_high = data_low & 0x000f'0000'0000'0000;
+
+			return limit_low | (limit_high >> 0x20);
+		}
+
+		void segment_descriptor_t::set_limit(u32 limit)
+		{
+			data_low &= 0xffff'ffff'ffff'0000;
+			data_low |= limit & 0x0000'0000'0000'ffff;
+
+			data_low &= 0xfff0'ffff'ffff'ffff;
+			data_low |= (limit & 0x000f'0000'0000'0000) << 0x20;
+		}
+
+		u64 segment_descriptor_t::get_base_low() const
+		{
+			u64 base_low = data_low & 0x0000'00ff'ffff'0000;
+			u64 base_high = data_low & 0xff00'0000'0000'0000;
+
+			return (base_low >> 0x10) | (base_high >> 0x20);
+		}
+
+		void segment_descriptor_t::set_base_low(u64 base)
+		{
+			data_low &= 0xffff'ff00'0000'ffff;
+			data_low |= (base & 0x0000'0000'00ff'ffff) << 0x10;
+
+			data_low &= 0x00ff'ffff'ffff'ffff;
+			data_low |= (base & 0x0000'0000'ff00'0000) << 0x20;
+		}
+
+		segment_descriptor_t::access_byte_t segment_descriptor_t::get_access_byte() const
+		{
+			return (data_low & 0x0000'ff00'0000'0000) >> 0x28;
+		}
+
+		void segment_descriptor_t::set_access_byte(access_byte_t access_byte)
+		{
+			data_low &= 0xffff'00ff'ffff'ffff;
+			data_low |= (static_cast<u64>(access_byte.value & 0x0000'00ff)) << 0x28;
+		}
+
+		segment_descriptor_t::flags_t segment_descriptor_t::get_flags() const
+		{
+			return (data_low & 0x00f0'0000'0000'0000) >> 0x34;
+		}
+
+		void segment_descriptor_t::set_flags(flags_t flags)
+		{
+			data_low &= 0xff0f'ffff'ffff'ffff;
+			data_low |= (static_cast<u64>(flags.value & 0x0000'000f)) << 0x34;
+		}
 	}
 }
