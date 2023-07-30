@@ -48,7 +48,7 @@ namespace kernel
 				/// <summary>
 				/// Raw value of the access byte.
 				/// </summary>
-				u8 value;
+				u8 value = 0;
 
 				/// <summary>
 				/// Type of the segment descriptor.
@@ -225,7 +225,7 @@ namespace kernel
 				/// <summary>
 				/// Raw value of the system access byte.
 				/// </summary>
-				u8 value;
+				u8 value = 0;
 
 				/// <summary>
 				/// Type of the system segment.
@@ -281,7 +281,7 @@ namespace kernel
 				/// <summary>
 				/// Raw value of the flags.
 				/// </summary>
-				u8 value;
+				u8 value = 0;
 
 
 
@@ -402,12 +402,12 @@ namespace kernel
 			/// <summary>
 			/// Size of the GDT.
 			/// 			/// </summary>
-			u16 size;
+			u16 size = 0;
 
 			/// <summary>
 			/// Pointer to the GDT.
 			/// </summary>
-			u64 offset;
+			u64 offset = 0;
 		} __attribute__((packed));
 
 		/// <summary>
