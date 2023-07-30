@@ -395,6 +395,22 @@ namespace kernel
 		} __attribute__((packed));
 
 		/// <summary>
+		/// Global descriptor table register.
+		/// </summary>
+		struct gdtr
+		{
+			/// <summary>
+			/// Size of the GDT.
+			/// 			/// </summary>
+			u16 size;
+
+			/// <summary>
+			/// Pointer to the GDT.
+			/// </summary>
+			u64 offset;
+		} __attribute__((packed));
+
+		/// <summary>
 		/// Global descriptor table manager.
 		/// </summary>
 		class gdt_manager
@@ -439,7 +455,7 @@ namespace kernel
 
 		private:
 			gdt m_gdt;
-			u64 m_gdtr;
+			gdtr m_gdtr;
 		};
 	}
 }
