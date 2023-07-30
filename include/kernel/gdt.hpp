@@ -328,12 +328,12 @@ namespace kernel
 			/// <summary>
 			/// Lower 64 bits of a segment descriptor.
 			/// </summary>
-			u64 data_low;
+			u64 data_low = 0;
 
 			/// <summary>
 			/// Upper 64 bits of a segment descriptor.
 			/// </summary>
-			u64 data_high;
+			u64 data_high = 0;
 
 			/// <returns>
 			/// The limit of the segment.
