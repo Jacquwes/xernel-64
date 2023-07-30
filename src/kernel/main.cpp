@@ -20,6 +20,7 @@
 
 #include <numerics.hpp>
 
+#include <gdt.hpp>
 #include <halt.hpp>
 #include <screen.hpp>
 #include <terminal.hpp>
@@ -27,8 +28,11 @@
 extern "C" void _start()
 {
 	auto screen = kernel::screen_manager();
-
 	auto terminal = kernel::terminal();
+	auto gdt = kernel::gdt::gdt_manager();
+
+	gdt.load_default();
+	gdt.lgdt();
 
 	terminal.put_string("Hello, world!\nf", 0xff7777, 0x007777);
 
