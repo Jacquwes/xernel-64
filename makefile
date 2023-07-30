@@ -71,7 +71,8 @@ install-limine:
 	git clone https://github.com/limine-bootloader/limine.git --branch=v5.x-branch-binary --depth=1
 	make -C limine
 
-xernerl.iso: $(output_file)
+.PHONY: iso
+iso: $(output_file)
 
 	mkdir -p iso_root
 	cp -v $(output_file) \
@@ -94,5 +95,5 @@ xernerl.iso: $(output_file)
 	./limine/limine bios-install xernel.iso
 
 .PHONY: run
-run: xernel.iso
+run: iso
 	qemu-system-x86_64 xernel.iso
