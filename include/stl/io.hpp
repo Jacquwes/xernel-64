@@ -16,26 +16,12 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#define GLOBAL_NUMERICS
+#pragma once
 
-#include <io.hpp>
 #include <numerics.hpp>
 
-#include <gdt.hpp>
-#include <halt.hpp>
-#include <screen.hpp>
-#include <terminal.hpp>
-
-extern "C" void _start()
+namespace stl
 {
-	auto screen = kernel::screen_manager();
-	auto terminal = kernel::terminal();
-	auto gdt = kernel::gdt::gdt_manager();
-
-	gdt.load_default();
-	gdt.lgdt();
-
-	stl::print("{}{} {}!\nXernel-{}", "Hello", ',', "World", 64);
-
-	kernel::halt();
+	void print(const char* format, ...);
+	void vprint(const char* format, __builtin_va_list args);
 }
