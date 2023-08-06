@@ -22,6 +22,36 @@ namespace kernel
 {
 	namespace gdt
 	{
+		u16 segment_selector_t::get_index() const
+		{
+			return (data & 0b1111'1111'1111'1000) >> 3;
+		}
+
+		void segment_selector_t::set_index(u16 index)
+		{
+			data &= (0b0000'0000'0000'0111 | ((index & 0b1'1111'1111'1111) << 3));
+		}
+
+		segment_selector_t::table_t segment_selector_t::get_table() const
+		{
+			return (data & 0b0000'0000'0000'0100) >> 2;
+		}
+
+		void segment_selector_t::set_table(segment_selector_t::table_t table)
+		{
+			data &= (0b1111'1111'1111'1011 | ((table & 1) << 2));
+		}
+
+		u8 segment_selector_t::get_requested_privilege_level() const
+		{
+			return data & 0b0000'0000'0000'0011;
+		}
+
+		void segment_selector_t::set_requested_privilege_level(u8 rpl)
+		{
+			data &= (0b1111'1111'1111'1100 | (rpl & 0b0011));
+		}
+
 		segment_descriptor_t::access_byte_t::access_byte_t(u8 value_)
 		{
 			value = value_;

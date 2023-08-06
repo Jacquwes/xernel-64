@@ -24,6 +24,27 @@ namespace kernel
 {
 	namespace gdt
 	{
+		// todo: document
+		struct segment_selector_t
+		{
+			enum table_t : u8
+			{
+				GDT = 0,
+				CURRENT_LDT = 1,
+			};
+			
+			u16 get_index() const;
+			void set_index(u16);
+			
+			table_t get_table() const;
+			void set_table(table_t);
+
+			u8 get_requested_privilege_level() const;
+			void set_requested_privilege_level(u8);
+
+			u16 data = 0;
+		};
+
 		/// <summary>
 		/// Describes a long mode segment descriptor.
 		/// </summary>
