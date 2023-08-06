@@ -20,8 +20,13 @@
 
 #include <numerics.hpp>
 
+#include <terminal.hpp>
+
 namespace stl
 {
-	void print(const char* format, ...);
-	void vprint(const char* format, __builtin_va_list args);
+	template <class... Args>
+	void print(const char* format, Args&&... args)
+	{
+		kernel::terminal::instance->put_string(format);
+	}
 }

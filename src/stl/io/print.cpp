@@ -22,21 +22,4 @@
 
 namespace stl
 {
-	void print(const char* format, ...)
-	{
-		__builtin_va_list args;
-		__builtin_va_start(args, format);
-		vprint(format, args);
-		__builtin_va_end(args);
-	}
-
-	void vprint(const char* format, __builtin_va_list args)
-	{
-		auto& terminal = *kernel::terminal::instance;
-
-		for (const char* c = format; *c != 0; c++)
-		{
-			terminal.put_char(*c);
-		}
-	}
 }
