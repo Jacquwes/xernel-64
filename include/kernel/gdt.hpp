@@ -407,7 +407,7 @@ namespace kernel
 		/// <summary>
 		/// Global descriptor table.
 		/// </summary>
-		struct gdt
+		struct gdt_t
 		{
 			/// <summary>
 			/// Store the entries of the GDT.
@@ -418,7 +418,7 @@ namespace kernel
 		/// <summary>
 		/// Global descriptor table register.
 		/// </summary>
-		struct gdtr
+		struct gdtr_t
 		{
 			/// <summary>
 			/// Size of the GDT.
@@ -475,8 +475,8 @@ namespace kernel
 			void lgdt();
 
 		private:
-			gdt m_gdt;
-			gdtr m_gdtr;
+			gdt_t m_gdt;
+			gdtr_t m_gdtr;
 		};
 	}
 }
