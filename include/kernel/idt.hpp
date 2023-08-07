@@ -65,8 +65,8 @@ namespace kernel
 
 		struct idtr_t
 		{
-			u16 size;
-			u64 offset;
+			u16 size = 0;
+			u64 offset = 0;
 		} __attribute__((packed));
 
 
