@@ -28,12 +28,6 @@ namespace kernel
 	}
 	namespace idt
 	{
-		struct idtr_t
-		{
-			u16 size;
-			u64 offset;
-		} __attribute__((packed));
-
 		struct gate_descriptor_t
 		{
 			enum gate_type_t
@@ -62,6 +56,17 @@ namespace kernel
 
 			u64 data_low = 0;
 			u64 data_high = 0;
+		} __attribute__((packed));
+
+		struct idt_t
+		{
+			gate_descriptor_t entries[0xff];
+		} __attribute__((packed));
+
+		struct idtr_t
+		{
+			u16 size;
+			u64 offset;
 		} __attribute__((packed));
 
 
