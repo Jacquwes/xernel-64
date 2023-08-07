@@ -30,7 +30,7 @@ namespace kernel
 
 		void gate_descriptor_t::set_present(u8 present)
 		{
-			data_low &= (0xffff'7fff'ffff'ffff | ((present & 1) << 0x2f));
+			data_low &= (0xffff'7fff'ffff'ffff | ((static_cast<u64>(present & 1)) << 0x2f));
 		}
 
 
@@ -42,7 +42,7 @@ namespace kernel
 
 		void gate_descriptor_t::set_descriptor_privilege_level(u8 dpl)
 		{
-			data_low &= (0xffff'9fff'ffff'ffff | ((dpl & 0b0011) << 0x2d));
+			data_low &= (0xffff'9fff'ffff'ffff | ((static_cast<u64>(dpl & 0b0011)) << 0x2d));
 		}
 
 
@@ -54,7 +54,7 @@ namespace kernel
 
 		void gate_descriptor_t::set_gate_type(gate_type_t gate_type)
 		{
-			data_low &= (0xffff'f0ff'ffff'ffff | ((gate_type & 0b1111) << 0x28));
+			data_low &= (0xffff'f0ff'ffff'ffff | ((static_cast<u64>(gate_type & 0b1111)) << 0x28));
 		}
 
 
@@ -66,7 +66,7 @@ namespace kernel
 
 		void gate_descriptor_t::set_interrupt_stack_table(u8 ist)
 		{
-			data_low &= (0xffff'fff8'ffff'ffff | ((ist & 0b0111) << 0x20));
+			data_low &= (0xffff'fff8'ffff'ffff | ((static_cast<u64>(ist & 0b0111)) << 0x20));
 		}
 
 
@@ -78,7 +78,7 @@ namespace kernel
 
 		void gate_descriptor_t::set_segment_selector(gdt::segment_selector_t segment_selector)
 		{
-			data_low &= (0xffff'ffff'0000'ffff | ((segment_selector.data & 0xffff) << 0x10));
+			data_low &= (0xffff'ffff'0000'ffff | ((static_cast<u64>(segment_selector.data & 0xffff)) << 0x10));
 		}
 
 
