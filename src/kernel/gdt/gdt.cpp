@@ -34,7 +34,7 @@ namespace kernel
 
 		segment_selector_t::table_t segment_selector_t::get_table() const
 		{
-			return (data & 0b0000'0000'0000'0100) >> 2;
+			return static_cast<segment_selector_t::table_t>((data & 0b0000'0000'0000'0100) >> 2);
 		}
 
 		void segment_selector_t::set_table(segment_selector_t::table_t table)

@@ -49,7 +49,7 @@ namespace kernel
 
 		gate_descriptor_t::gate_type_t gate_descriptor_t::get_gate_type() const
 		{
-			return (data_low & 0x0000'0f00'0000'0000) >> 0x28;
+			return static_cast<gate_descriptor_t::gate_type_t>((data_low & 0x0000'0f00'0000'0000) >> 0x28);
 		}
 
 		void gate_descriptor_t::set_gate_type(gate_type_t gate_type)

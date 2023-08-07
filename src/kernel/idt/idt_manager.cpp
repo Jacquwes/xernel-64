@@ -55,10 +55,10 @@ namespace kernel
 				entry.set_interrupt_stack_table(0);
 				gdt::segment_selector_t selector;
 				selector.set_index(0);
-				selector.set_table(0);
+				selector.set_table(gdt::segment_selector_t::table_t::GDT);
 				selector.set_requested_privilege_level(0);
 				entry.set_segment_selector(selector);
-				entry.set_offset(&default_interrupt_routine);
+				entry.set_offset((u64)&default_interrupt_routine);
 			}
 		}
 
