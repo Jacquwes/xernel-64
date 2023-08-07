@@ -17,11 +17,20 @@
 */
 
 #include <idt.hpp>
+#include <gdt.hpp>
+#include <halt.hpp>
+#include <terminal.hpp>
 
 namespace kernel
 {
 	namespace idt
 	{
+		void default_interrupt_routine()
+		{
+			terminal::instance->put_string("An interrupt ocurred; Halting the CPU.");
+			halt();
+		}
+
 		idt_manager::idt_manager()
 		{}
 
@@ -33,6 +42,24 @@ namespace kernel
 		void idt_manager::set_entry(u8 index, gate_descriptor_t entry)
 		{
 			m_idt.entries[index] = entry;
+		}
+
+		void idt_manager::load_default()
+		{
+			for (gate_descriptor_t& entry : m_idt.entries)
+			{
+				entry.set_present(true);
+				entry.set_descriptor_privilege_level(0);
+				// todo: interrupt gates
+				entry.set_gate_type(gate_descriptor_t::TRAP_GATE);
+				entry.set_interrupt_stack_table(0);
+				gdt::segment_selector_t selector;
+				selector.set_index(0);
+				selector.set_table(0);
+				selector.set_requested_privilege_level(0);
+				entry.set_segment_selector(selector);
+				entry.set_offset(&default_interrupt_routine);
+			}
 		}
 
 		void idt_manager::flush()
