@@ -85,9 +85,7 @@ namespace kernel
 		void gdt_manager::flush()
 		{
 			for (segment_descriptor_t& entry : m_gdt.entries)
-			{
 				entry = segment_descriptor_t();
-			}
 		}
 
 		void gdt_manager::lgdt()

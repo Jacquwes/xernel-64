@@ -60,7 +60,7 @@ namespace kernel
 
 		struct idt_t
 		{
-			gate_descriptor_t entries[0xff];
+			gate_descriptor_t entries[0x100];
 		} __attribute__((packed));
 
 		struct idtr_t
@@ -69,6 +69,24 @@ namespace kernel
 			u64 offset = 0;
 		} __attribute__((packed));
 
+		struct idt_manager
+		{
+			static idt_manager* instance;
 
+			idt_manager();
+
+			gate_descriptor_t get_entry(u8 index) const;
+			void set_entry(u8 index, gate_descriptor_t entry);
+
+			void load_default();
+
+			void flush();
+
+			void lidt();
+
+		private:
+			idt_t m_idt;
+			idtr_t m_idtr;
+		};
 	}
 }
