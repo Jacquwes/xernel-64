@@ -22,6 +22,7 @@
 
 #include <gdt.hpp>
 #include <halt.hpp>
+#include <pic.hpp>
 #include <screen.hpp>
 #include <terminal.hpp>
 
@@ -30,6 +31,7 @@ extern "C" void _start()
 	auto screen = kernel::screen_manager();
 	auto terminal = kernel::terminal();
 	auto gdt = kernel::gdt::gdt_manager();
+	auto pic = kernel::pic::pic_manager();
 
 	gdt.load_default();
 	gdt.lgdt();
