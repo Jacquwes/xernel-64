@@ -65,7 +65,7 @@ namespace kernel
 		public:
 			pic_manager();
 
-			pic_manager* get_instance();
+			static pic_manager* get_instance();
 
 			void init_pic();
 
