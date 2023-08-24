@@ -16,32 +16,30 @@
 	along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#define GLOBAL_NUMERICS
+
+#pragma once
 
 #include <numerics.hpp>
-
-#include <gdt.hpp>
-#include <halt.hpp>
 #include <pic.hpp>
-#include <screen.hpp>
-#include <serial.hpp>
-#include <terminal.hpp>
 
-extern "C" void _start()
+namespace kernel
 {
-	auto screen = kernel::screen_manager();
-	auto terminal = kernel::terminal();
-	auto gdt = kernel::gdt::gdt_manager();
-	auto pic = kernel::pic::pic_manager();
-	auto serial = kernel::serial::serial_manager();
+	namespace serial
+	{
+		class serial_manager
+		{
+		public:
+			serial_manager();
 
-	gdt.load_default();
-	gdt.lgdt();
+			static serial_manager* get_instance();
 
-	terminal.put_string("Hello, world!\nf", 0xff7777, 0x007777);
+			void init_port(pic::com_ports_t port = pic::com_ports_t::COM1);
 
-	serial.init_port();
-	serial.put_string("Hello serial!\n");
+			void put_char(char c, pic::com_ports_t port = pic::com_ports_t::COM1);
+			void put_string(char const* s, pic::com_ports_t port = pic::com_ports_t::COM1);
 
-	kernel::halt();
+		private:
+			static serial_manager* instance;
+		};
+	}
 }
