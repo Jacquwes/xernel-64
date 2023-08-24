@@ -96,4 +96,4 @@ iso: $(output_file)
 
 .PHONY: run
 run: iso
-	qemu-system-x86_64 xernel.iso
+	qemu-system-x86_64 xernel.iso -serial stdio
